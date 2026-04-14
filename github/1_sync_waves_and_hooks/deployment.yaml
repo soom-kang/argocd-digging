@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: waves-hooks-nginx
+  namespace: study-waves-hooks
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: waves-hooks-nginx
+  template:
+    metadata:
+      labels:
+        app: waves-hooks-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          env:
+            - name: APP_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: waves-hooks-config
+                  key: APP_MODE
+          ports:
+            - containerPort: 80

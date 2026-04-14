@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: basic-sync-config
+  namespace: study-basic-sync
+data:
+  APP_MESSAGE: "hello-from-basic-sync"

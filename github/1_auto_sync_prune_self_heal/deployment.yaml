@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auto-sync-nginx
+  namespace: study-auto-sync
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auto-sync-nginx
+  template:
+    metadata:
+      labels:
+        app: auto-sync-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: auto-sync-config

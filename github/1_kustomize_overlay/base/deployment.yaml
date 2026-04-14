@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kustomize-demo
+  namespace: study-kustomize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kustomize-demo
+  template:
+    metadata:
+      labels:
+        app: kustomize-demo
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.26-alpine
+          ports:
+            - containerPort: 80

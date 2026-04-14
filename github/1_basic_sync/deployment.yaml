@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-sync-nginx
+  namespace: study-basic-sync
+  labels:
+    app: basic-sync-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: basic-sync-nginx
+  template:
+    metadata:
+      labels:
+        app: basic-sync-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: basic-sync-config
+                  key: APP_MESSAGE

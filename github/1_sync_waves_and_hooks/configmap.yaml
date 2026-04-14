@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: waves-hooks-config
+  namespace: study-waves-hooks
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+data:
+  APP_MODE: "wave-test"

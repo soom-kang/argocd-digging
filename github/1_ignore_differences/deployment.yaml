@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ignore-diff-demo
+  namespace: study-ignore-diff
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ignore-diff-demo
+  template:
+    metadata:
+      labels:
+        app: ignore-diff-demo
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80

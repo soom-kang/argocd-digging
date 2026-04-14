@@ -1,0 +1,16 @@
+# Argo CD Study Instructions
+
+## 전체 설치 문서
+
+- `00_argocd_setup.md`: 신규 스터디 클러스터 대상 Argo CD 설치/접속/프로젝트 구성
+
+## 기능별 1:1 매칭 문서
+
+아래 폴더명은 `github/`와 정확히 동일합니다.
+
+- `1_basic_sync`
+- `1_auto_sync_prune_self_heal`
+- `1_sync_waves_and_hooks`
+- `1_ignore_differences`
+- `1_helm_chart`
+- `1_kustomize_overlay`

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: auto-sync-nginx
+  namespace: study-auto-sync
+spec:
+  selector:
+    app: auto-sync-nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

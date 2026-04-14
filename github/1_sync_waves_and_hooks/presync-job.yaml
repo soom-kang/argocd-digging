@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: waves-hooks-presync-check
+  namespace: study-waves-hooks
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: precheck
+          image: busybox:1.36
+          command: ["sh", "-c", "echo '[PreSync] validation start'; sleep 3; echo '[PreSync] validation done'"]
