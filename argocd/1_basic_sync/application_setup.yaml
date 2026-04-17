@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-basic-sync
+spec:
+  project: study
+  source:
+    repoURL: https://github.com/soom-kang/argocd-digging.git
+    targetRevision: main
+    path: github/1_basic_sync
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-basic-sync
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=false

@@ -1,26 +1,13 @@
-# 1_sync_waves_and_hooks
+# 3_sync_waves_and_hooks
 
-- 매칭 Git 경로: `github/1_sync_waves_and_hooks`
+- 매칭 Git 경로: `github/3_sync_waves_and_hooks`
 - 목표: hook + sync wave 실행 순서 검증
 
-## Step 1. Application 생성
+## Step 1. Application 생성 (yaml 파일 적용)
 
 ```bash
-cat <<EOF | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: study-waves-hooks
-spec:
-  project: study
-  source:
-    repoURL: ${REPO_URL}
-    targetRevision: main
-    path: github/1_sync_waves_and_hooks
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: study-waves-hooks
-EOF
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/3_sync_waves_and_hooks/argo_setup.yaml \
+  | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 ```
 
 ## Step 2. Sync 실행

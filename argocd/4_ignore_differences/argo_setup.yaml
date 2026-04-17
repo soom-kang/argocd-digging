@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-ignore-diff
+spec:
+  project: study
+  source:
+    repoURL: ${REPO_URL}
+    targetRevision: main
+    path: github/4_ignore_differences
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-ignore-diff
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: ignore-diff-demo
+      namespace: study-ignore-diff
+      jsonPointers:
+        - /spec/replicas

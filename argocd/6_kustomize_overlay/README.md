@@ -1,26 +1,13 @@
-# 1_kustomize_overlay
+# 6_kustomize_overlay
 
-- 매칭 Git 경로: `github/1_kustomize_overlay`
+- 매칭 Git 경로: `github/6_kustomize_overlay`
 - 목표: Kustomize overlay 적용 결과 검증
 
-## Step 1. Application 생성 (overlay 경로 지정)
+## Step 1. Application 생성 (overlay 경로 + yaml 파일 적용)
 
 ```bash
-cat <<EOF | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: study-kustomize-dev
-spec:
-  project: study
-  source:
-    repoURL: ${REPO_URL}
-    targetRevision: main
-    path: github/1_kustomize_overlay/overlays/dev
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: study-kustomize
-EOF
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/6_kustomize_overlay/argo_setup.yaml \
+  | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 ```
 
 ## Step 2. Sync 및 결과 확인

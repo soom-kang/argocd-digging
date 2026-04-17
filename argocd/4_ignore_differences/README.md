@@ -1,33 +1,13 @@
-# 1_ignore_differences
+# 4_ignore_differences
 
-- 매칭 Git 경로: `github/1_ignore_differences`
+- 매칭 Git 경로: `github/4_ignore_differences`
 - 목표: 특정 필드(`/spec/replicas`) 드리프트 무시 확인
 
-## Step 1. Application 생성 (ignoreDifferences 포함)
+## Step 1. Application 생성 (ignoreDifferences + yaml 파일 적용)
 
 ```bash
-cat <<EOF | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: study-ignore-diff
-spec:
-  project: study
-  source:
-    repoURL: ${REPO_URL}
-    targetRevision: main
-    path: github/1_ignore_differences
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: study-ignore-diff
-  ignoreDifferences:
-    - group: apps
-      kind: Deployment
-      name: ignore-diff-demo
-      namespace: study-ignore-diff
-      jsonPointers:
-        - /spec/replicas
-EOF
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/4_ignore_differences/argo_setup.yaml \
+  | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 ```
 
 ## Step 2. Sync 실행
