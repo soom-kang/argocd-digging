@@ -9,8 +9,8 @@
 아래 폴더명은 `github/`와 정확히 동일합니다.
 
 - `1_basic_sync`
-- `1_auto_sync_prune_self_heal`
-- `1_sync_waves_and_hooks`
-- `1_ignore_differences`
-- `1_helm_chart`
-- `1_kustomize_overlay`
+- `2_auto_sync_prune_self_heal`
+- `3_sync_waves_and_hooks`
+- `4_ignore_differences`
+- `5_helm_chart`
+- `6_kustomize_overlay`
