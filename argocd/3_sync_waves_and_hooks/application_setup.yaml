@@ -5,7 +5,7 @@ metadata:
 spec:
   project: study
   source:
-    repoURL: ${REPO_URL}
+    repoURL: https://github.com/soom-kang/argocd-digging.git
     targetRevision: main
     path: github/3_sync_waves_and_hooks
   destination:
