@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orphan-monitor-nginx
+  namespace: study-orphan-monitor
+  labels:
+    app: orphan-monitor-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orphan-monitor-nginx
+  template:
+    metadata:
+      labels:
+        app: orphan-monitor-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80

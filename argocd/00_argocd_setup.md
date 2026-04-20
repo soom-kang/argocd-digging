@@ -59,7 +59,7 @@ argocd login "localhost:${ARGOCD_PORT_HTTPS}" \
 ## Step 5. 스터디용 AppProject 생성
 
 ```bash
-cat <<EOF | kubectl --kubeconfig "$STUDY_KUBECONFIG" apply -f -
+cat <<EOF2 | kubectl --kubeconfig "$STUDY_KUBECONFIG" apply -f -
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
@@ -75,7 +75,7 @@ spec:
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'
-EOF
+EOF2
 ```
 
 ## Step 6. 저장소 등록 (필요 시)
@@ -96,3 +96,7 @@ argocd repo add "$REPO_URL" --argocd-context "$ARGOCD_CLI_CONTEXT"
 4. `argocd/4_ignore_differences/README.md`
 5. `argocd/5_helm_chart/README.md`
 6. `argocd/6_kustomize_overlay/README.md`
+7. `argocd/7_multi_source_helm_values/README.md`
+8. `argocd/8_applicationset_list_generator/README.md`
+9. `argocd/9_sync_windows/README.md`
+10. `argocd/10_orphaned_resources_monitoring/README.md`

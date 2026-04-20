@@ -14,3 +14,7 @@
 - `4_ignore_differences`
 - `5_helm_chart`
 - `6_kustomize_overlay`
+- `7_multi_source_helm_values`
+- `8_applicationset_list_generator`
+- `9_sync_windows`
+- `10_orphaned_resources_monitoring`

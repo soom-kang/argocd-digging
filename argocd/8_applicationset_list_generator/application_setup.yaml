@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: study-list-generator
+spec:
+  generators:
+    - list:
+        elements:
+          - appName: team-a
+            path: github/8_applicationset_list_generator/apps/team-a
+            namespace: study-appset-team-a
+          - appName: team-b
+            path: github/8_applicationset_list_generator/apps/team-b
+            namespace: study-appset-team-b
+  template:
+    metadata:
+      name: "study-{{appName}}"
+    spec:
+      project: study
+      source:
+        repoURL: ${REPO_URL}
+        targetRevision: main
+        path: "{{path}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{namespace}}"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=false

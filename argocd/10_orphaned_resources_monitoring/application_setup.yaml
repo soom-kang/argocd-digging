@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: study-orphan-monitor
+spec:
+  description: Study project for orphaned resources monitoring
+  sourceRepos:
+    - ${REPO_URL}
+  destinations:
+    - namespace: study-orphan-monitor
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  orphanedResources:
+    warn: true
+    ignore:
+      - group: ""
+        kind: ConfigMap
+        name: kube-root-ca.crt
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-orphan-monitor-app
+spec:
+  project: study-orphan-monitor
+  source:
+    repoURL: ${REPO_URL}
+    targetRevision: main
+    path: github/10_orphaned_resources_monitoring
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-orphan-monitor

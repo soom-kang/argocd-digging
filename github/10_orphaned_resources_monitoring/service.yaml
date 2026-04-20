@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orphan-monitor-nginx
+  namespace: study-orphan-monitor
+spec:
+  selector:
+    app: orphan-monitor-nginx
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP

@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: study-sync-window
+spec:
+  description: Study project for sync windows behavior
+  sourceRepos:
+    - ${REPO_URL}
+  destinations:
+    - namespace: study-sync-window
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  syncWindows:
+    - kind: deny
+      schedule: "* * * * *"
+      duration: 24h
+      applications:
+        - study-sync-window-app
+      manualSync: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-sync-window-app
+spec:
+  project: study-sync-window
+  source:
+    repoURL: ${REPO_URL}
+    targetRevision: main
+    path: github/9_sync_windows
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-sync-window

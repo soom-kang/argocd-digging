@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: team-a-nginx
+  namespace: study-appset-team-a
+  labels:
+    app: team-a-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: team-a-nginx
+  template:
+    metadata:
+      labels:
+        app: team-a-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80

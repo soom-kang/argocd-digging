@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sync-window-nginx
+  namespace: study-sync-window
+  labels:
+    app: sync-window-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sync-window-nginx
+  template:
+    metadata:
+      labels:
+        app: sync-window-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80

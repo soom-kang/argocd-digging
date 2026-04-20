@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-multi-source
+spec:
+  project: study
+  sources:
+    - repoURL: ${REPO_URL}
+      targetRevision: main
+      path: github/7_multi_source_helm_values/chart
+      helm:
+        releaseName: study-multi-source
+        valueFiles:
+          - $values/github/7_multi_source_helm_values/values/dev-values.yaml
+    - repoURL: ${REPO_URL}
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-multi-source
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
