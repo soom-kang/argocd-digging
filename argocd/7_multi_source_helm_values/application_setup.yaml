@@ -5,14 +5,14 @@ metadata:
 spec:
   project: study
   sources:
-    - repoURL: ${REPO_URL}
+    - repoURL: https://github.com/soom-kang/argocd-digging.git
       targetRevision: main
       path: github/7_multi_source_helm_values/chart
       helm:
         releaseName: study-multi-source
         valueFiles:
           - $values/github/7_multi_source_helm_values/values/dev-values.yaml
-    - repoURL: ${REPO_URL}
+    - repoURL: https://github.com/soom-kang/argocd-digging.git
       targetRevision: main
       ref: values
   destination:

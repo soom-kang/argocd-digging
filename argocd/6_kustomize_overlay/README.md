@@ -115,6 +115,15 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-kustomize get deploy kustomize
 
 ---
 
+## Step 3. 정리 (삭제)
+
+```bash
+argocd app delete study-kustomize-dev --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-kustomize --ignore-not-found
+```
+
+---
+
 # 운영 시 주의점
 
 - overlay가 많아질수록 patch 충돌/중복이 생길 수 있어 공통값은 base로 최대한 올리는 것이 좋음

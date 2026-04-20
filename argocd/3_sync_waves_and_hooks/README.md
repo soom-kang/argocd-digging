@@ -235,3 +235,10 @@ argocd app history study-waves-hooks --argocd-context "$ARGOCD_CLI_CONTEXT"
 1. `PreSync` Job(`waves-hooks-presync-check`)이 먼저 실행
 2. wave 0 ConfigMap 생성 후 wave 1 Deployment 반영
 3. HookSucceeded 정책으로 Job은 성공 후 정리
+
+## Step 4. 정리 (삭제)
+
+```bash
+argocd app delete study-waves-hooks --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-waves-hooks --ignore-not-found
+```

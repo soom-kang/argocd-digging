@@ -185,3 +185,10 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-auto-sync get configmap
 ```
 
 삭제한 ConfigMap이 클러스터에서도 제거되면 prune 검증이 완료됩니다.
+
+## Step 5. 정리 (삭제)
+
+```bash
+argocd app delete study-auto-sync --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-auto-sync --ignore-not-found
+```

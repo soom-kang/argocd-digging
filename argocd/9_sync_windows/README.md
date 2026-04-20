@@ -41,8 +41,7 @@ spec:
 ## Step 1. Project + Application 생성
 
 ```bash
-awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/9_sync_windows/application_setup.yaml \
-  | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
+kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f argocd/9_sync_windows/application_setup.yaml
 ```
 
 ## Step 2. 수동 Sync 차단 확인
@@ -71,6 +70,16 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-sync-window get deploy,svc
 
 1. `manualSync=false`에서는 수동 sync도 차단
 2. `manualSync=true`로 변경하면 수동 sync는 허용
+
+---
+
+## Step 4. 정리 (삭제)
+
+```bash
+argocd app delete study-sync-window-app --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" delete appproject study-sync-window --ignore-not-found
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-sync-window --ignore-not-found
+```
 
 ---
 

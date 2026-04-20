@@ -34,8 +34,7 @@ spec:
 ## Step 1. Project + Application 생성
 
 ```bash
-awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/10_orphaned_resources_monitoring/application_setup.yaml \
-  | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
+kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f argocd/10_orphaned_resources_monitoring/application_setup.yaml
 
 argocd app sync study-orphan-monitor-app --argocd-context "$ARGOCD_CLI_CONTEXT"
 ```
@@ -64,6 +63,16 @@ argocd app resources study-orphan-monitor-app --orphaned --argocd-context "$ARGO
 ```bash
 kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-orphan-monitor delete configmap manual-orphan
 argocd app get study-orphan-monitor-app --argocd-context "$ARGOCD_CLI_CONTEXT"
+```
+
+---
+
+## Step 5. 정리 (삭제)
+
+```bash
+argocd app delete study-orphan-monitor-app --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" delete appproject study-orphan-monitor --ignore-not-found
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-orphan-monitor --ignore-not-found
 ```
 
 ---

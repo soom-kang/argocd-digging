@@ -198,6 +198,15 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-helm get deploy -o wide
 
 ---
 
+## Step 4. 정리 (삭제)
+
+```bash
+argocd app delete study-helm --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-helm --ignore-not-found
+```
+
+---
+
 # 운영 시 주의점
 
 - values 소스가 여러 개면 우선순위/출처 추적이 어려워짐

@@ -12,13 +12,16 @@ spec:
           - appName: team-b
             path: github/8_applicationset_list_generator/apps/team-b
             namespace: study-appset-team-b
+          # - appName: team-c
+          #   path: github/8_applicationset_list_generator/apps/team-c
+          #   namespace: study-appset-team-c
   template:
     metadata:
       name: "study-{{appName}}"
     spec:
       project: study
       source:
-        repoURL: ${REPO_URL}
+        repoURL: https://github.com/soom-kang/argocd-digging.git
         targetRevision: main
         path: "{{path}}"
       destination:

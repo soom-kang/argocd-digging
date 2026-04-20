@@ -9,10 +9,11 @@
 
 `ApplicationSet`은 "Application을 자동으로 만들어내는 상위 리소스"입니다.
 
-이 실습에서는 `list` generator를 사용해 다음 2개 App을 생성합니다.
+이 실습에서는 `list` generator를 사용해 다음 3개 App을 생성합니다.
 
 - `study-team-a` -> `apps/team-a`
 - `study-team-b` -> `apps/team-b`
+- `study-team-c` -> `apps/team-c`
 
 핵심 효과:
 
@@ -51,6 +52,9 @@ template:
 ```bash
 awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/8_applicationset_list_generator/application_setup.yaml \
   | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
+
+# or
+kstudy apply -f ./application_setup.yaml
 ```
 
 ## Step 2. 생성된 Application 확인
@@ -65,21 +69,41 @@ argocd app list --argocd-context "$ARGOCD_CLI_CONTEXT" | grep '^study-team-'
 ```bash
 argocd app sync study-team-a --argocd-context "$ARGOCD_CLI_CONTEXT"
 argocd app sync study-team-b --argocd-context "$ARGOCD_CLI_CONTEXT"
+argocd app sync study-team-c --argocd-context "$ARGOCD_CLI_CONTEXT"
 kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-appset-team-a get deploy,svc
 kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-appset-team-b get deploy,svc
+kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-appset-team-c get deploy,svc
 ```
 
 검증 포인트:
 
-1. `ApplicationSet` 1개로 `study-team-a`, `study-team-b` 두 App이 생성됨
+1. `ApplicationSet` 1개로 `study-team-a`, `study-team-b`, `study-team-c` 세 App이 생성됨
 2. 각 App이 서로 다른 path/namespace를 배포함
 
 ---
 
 # 3. 확장 테스트 (선택)
 
-`elements`에 team-c를 추가한 뒤 재적용하면,
+`elements`에 team-d를 추가한 뒤 재적용하면,
 새 Application이 자동으로 생성되는지 확인할 수 있습니다.
+
+---
+
+## Step 4. 정리 (ApplicationSet + 생성 Application 삭제)
+
+`ApplicationSet`이 남아 있으면 삭제한 Application이 다시 생성될 수 있으므로,
+먼저 ApplicationSet을 지운 뒤 생성된 App들을 정리합니다.
+
+```bash
+kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" delete applicationset study-list-generator --ignore-not-found
+
+for app in study-team-a study-team-b study-team-c; do
+  argocd app delete "$app" --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT" || true
+done
+
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace \
+  study-appset-team-a study-appset-team-b study-appset-team-c --ignore-not-found
+```
 
 ---
 

@@ -81,6 +81,15 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-multi-source get svc study-mul
 
 ---
 
+## Step 4. 정리 (삭제)
+
+```bash
+argocd app delete study-multi-source --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-multi-source --ignore-not-found
+```
+
+---
+
 # 운영 시 주의점
 
 - multi-source는 강력하지만 source 간 참조 관계(`$values/...`)가 깨지면 즉시 sync 실패

@@ -27,3 +27,10 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-basic-sync get all,cm
 ```
 
 `Synced` + `Healthy` 상태면 성공입니다.
+
+## Step 4. 정리 (삭제)
+
+```bash
+argocd app delete study-basic-sync --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-basic-sync --ignore-not-found
+```

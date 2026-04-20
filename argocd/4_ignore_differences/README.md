@@ -99,6 +99,15 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-ignore-diff get deploy ignore-
 
 ---
 
+## Step 5. 정리 (삭제)
+
+```bash
+argocd app delete study-ignore-diff --cascade --yes --argocd-context "$ARGOCD_CLI_CONTEXT"
+kubectl --kubeconfig "$STUDY_KUBECONFIG" delete namespace study-ignore-diff --ignore-not-found
+```
+
+---
+
 # 운영 시 주의점
 
 - 무시 범위를 넓게 잡으면 실제 장애 원인 drift까지 숨길 수 있음

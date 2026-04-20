@@ -5,7 +5,7 @@ metadata:
 spec:
   description: Study project for orphaned resources monitoring
   sourceRepos:
-    - ${REPO_URL}
+    - https://github.com/soom-kang/argocd-digging.git
   destinations:
     - namespace: study-orphan-monitor
       server: https://kubernetes.default.svc
@@ -26,7 +26,7 @@ metadata:
 spec:
   project: study-orphan-monitor
   source:
-    repoURL: ${REPO_URL}
+    repoURL: https://github.com/soom-kang/argocd-digging.git
     targetRevision: main
     path: github/10_orphaned_resources_monitoring
   destination:

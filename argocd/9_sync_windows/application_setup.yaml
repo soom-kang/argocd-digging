@@ -5,7 +5,7 @@ metadata:
 spec:
   description: Study project for sync windows behavior
   sourceRepos:
-    - ${REPO_URL}
+    - https://github.com/soom-kang/argocd-digging.git
   destinations:
     - namespace: study-sync-window
       server: https://kubernetes.default.svc
@@ -27,7 +27,7 @@ metadata:
 spec:
   project: study-sync-window
   source:
-    repoURL: ${REPO_URL}
+    repoURL: https://github.com/soom-kang/argocd-digging.git
     targetRevision: main
     path: github/9_sync_windows
   destination:

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: team-c-nginx
+  namespace: study-appset-team-c
+  labels:
+    app: team-c-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: team-c-nginx
+  template:
+    metadata:
+      labels:
+        app: team-c-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.26-alpine
+          ports:
+            - containerPort: 80
