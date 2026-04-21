@@ -18,3 +18,4 @@
 - `08_applicationset_list_generator`
 - `09_sync_windows`
 - `10_orphaned_resources_monitoring`
+- `11_sync_options`

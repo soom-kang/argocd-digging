@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sync-options-prune-candidate
+  namespace: study-sync-options
+data:
+  NOTE: "delete-this-file-in-git-to-test-prune"

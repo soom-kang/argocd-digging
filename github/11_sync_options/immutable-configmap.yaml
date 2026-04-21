@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sync-options-immutable
+  namespace: study-sync-options
+immutable: true
+data:
+  VERSION: "v1"

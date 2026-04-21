@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sync-options-nginx
+  namespace: study-sync-options
+  labels:
+    app: sync-options-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sync-options-nginx
+  template:
+    metadata:
+      labels:
+        app: sync-options-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: sync-options-config
+                  key: APP_MESSAGE

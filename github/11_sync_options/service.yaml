@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sync-options-nginx
+  namespace: study-sync-options
+spec:
+  selector:
+    app: sync-options-nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

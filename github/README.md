@@ -14,5 +14,6 @@
 - `08_applicationset_list_generator`: ApplicationSet List Generator
 - `09_sync_windows`: AppProject sync window 동기화 제어
 - `10_orphaned_resources_monitoring`: orphaned resource 경고 감지
+- `11_sync_options`: sync 실행 옵션/동작 옵션 심화 (prune, dry-run, force, replace, retry)
 
 각 기능에 대한 실행 가이드는 `argocd/` 폴더의 동일한 이름 문서를 참고하세요.

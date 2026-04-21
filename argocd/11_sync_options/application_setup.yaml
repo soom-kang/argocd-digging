@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-sync-options
+spec:
+  project: study
+  source:
+    repoURL: https://github.com/soom-kang/argocd-digging.git
+    targetRevision: main
+    path: github/11_sync_options
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-sync-options
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: sync-options-nginx
+      namespace: study-sync-options
+      jsonPointers:
+        - /spec/replicas
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        app.kubernetes.io/part-of: argocd-study
+        study.argocd/topic: sync-options
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true
+      - RespectIgnoreDifferences=true
+      - ServerSideApply=true
+      - PrunePropagationPolicy=foreground
+    retry:
+      limit: 3
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
+      refresh: true
