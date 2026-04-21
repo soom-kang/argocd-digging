@@ -1,6 +1,6 @@
-# 8_applicationset_list_generator
+# 08_applicationset_list_generator
 
-- 매칭 Git 경로: `github/8_applicationset_list_generator/apps/*`
+- 매칭 Git 경로: `github/08_applicationset_list_generator/apps/*`
 - 목표: ApplicationSet List Generator로 여러 Application을 선언적으로 생성/유지하는 방식 검증
 
 ---
@@ -31,7 +31,7 @@ spec:
     - list:
         elements:
           - appName: team-a
-            path: github/8_applicationset_list_generator/apps/team-a
+            path: github/08_applicationset_list_generator/apps/team-a
 ```
 
 ```yaml
@@ -50,7 +50,7 @@ template:
 ## Step 1. ApplicationSet 생성
 
 ```bash
-awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/8_applicationset_list_generator/application_setup.yaml \
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/08_applicationset_list_generator/application_setup.yaml \
   | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 
 # or

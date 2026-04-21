@@ -1,6 +1,6 @@
-# 9_sync_windows
+# 09_sync_windows
 
-- 매칭 Git 경로: `github/9_sync_windows`
+- 매칭 Git 경로: `github/09_sync_windows`
 - 목표: AppProject `syncWindows`로 동기화 허용 시간대를 제어하는 동작 검증
 
 ---
@@ -41,7 +41,7 @@ spec:
 ## Step 1. Project + Application 생성
 
 ```bash
-kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f argocd/9_sync_windows/application_setup.yaml
+kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f argocd/09_sync_windows/application_setup.yaml
 ```
 
 ## Step 2. 수동 Sync 차단 확인

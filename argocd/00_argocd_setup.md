@@ -90,13 +90,13 @@ argocd repo add "$REPO_URL" --argocd-context "$ARGOCD_CLI_CONTEXT"
 
 아래 문서는 `github/` 경로와 1:1로 매칭됩니다.
 
-1. `argocd/1_basic_sync/README.md`
-2. `argocd/2_auto_sync_prune_self_heal/README.md`
-3. `argocd/3_sync_waves_and_hooks/README.md`
-4. `argocd/4_ignore_differences/README.md`
-5. `argocd/5_helm_chart/README.md`
-6. `argocd/6_kustomize_overlay/README.md`
-7. `argocd/7_multi_source_helm_values/README.md`
-8. `argocd/8_applicationset_list_generator/README.md`
-9. `argocd/9_sync_windows/README.md`
+1. `argocd/01_basic_sync/README.md`
+2. `argocd/02_auto_sync_prune_self_heal/README.md`
+3. `argocd/03_sync_waves_and_hooks/README.md`
+4. `argocd/04_ignore_differences/README.md`
+5. `argocd/05_helm_chart/README.md`
+6. `argocd/06_kustomize_overlay/README.md`
+7. `argocd/07_multi_source_helm_values/README.md`
+8. `argocd/08_applicationset_list_generator/README.md`
+9. `argocd/09_sync_windows/README.md`
 10. `argocd/10_orphaned_resources_monitoring/README.md`

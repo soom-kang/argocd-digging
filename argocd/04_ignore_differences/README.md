@@ -1,6 +1,6 @@
-# 4_ignore_differences
+# 04_ignore_differences
 
-- 매칭 Git 경로: `github/4_ignore_differences`
+- 매칭 Git 경로: `github/04_ignore_differences`
 - 목표: `ignoreDifferences`로 특정 필드 드리프트를 의도적으로 무시하는 동작 검증
 
 ---
@@ -19,14 +19,14 @@ Argo CD는 기본적으로 Git(desired state)와 클러스터(live state)를 비
 
 ---
 
-# 2. argocd/4_ignore_differences/argo_setup.yaml 설명
+# 2. argocd/04_ignore_differences/argo_setup.yaml 설명
 
 `Application` 설정 핵심:
 
 ```yaml
 spec:
   source:
-    path: github/4_ignore_differences
+    path: github/04_ignore_differences
   ignoreDifferences:
     - group: apps
       kind: Deployment
@@ -44,7 +44,7 @@ spec:
 
 ---
 
-# 3. github/4_ignore_differences YAML 설명
+# 3. github/04_ignore_differences YAML 설명
 
 ## namespace.yaml
 
@@ -69,7 +69,7 @@ spec:
 ## Step 1. Application 생성 (ignoreDifferences 설정 적용)
 
 ```bash
-awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/4_ignore_differences/argo_setup.yaml \
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/04_ignore_differences/argo_setup.yaml \
   | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 ```
 

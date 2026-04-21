@@ -1,16 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: study-basic-sync
+  name: study-helm
 spec:
   project: study
   source:
     repoURL: https://github.com/soom-kang/argocd-digging.git
     targetRevision: main
-    path: github/1_basic_sync
+    path: github/05_helm_chart
+    helm:
+      releaseName: study-helm
+      values: |
+        replicaCount: 2
+        service:
+          type: ClusterIP
+          port: 80
   destination:
     server: https://kubernetes.default.svc
-    namespace: study-basic-sync
+    namespace: study-helm
   syncPolicy:
     syncOptions:
-      - CreateNamespace=false
+      - CreateNamespace=true

@@ -1,12 +1,12 @@
-# 1_basic_sync
+# 01_basic_sync
 
-- 매칭 Git 경로: `github/1_basic_sync`
+- 매칭 Git 경로: `github/01_basic_sync`
 - 목표: Argo CD 기본 sync/health 동작 확인
 
 ## Step 1. Application 생성 (yaml 파일 적용)
 
 ```bash
-awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/1_basic_sync/application_setup.yaml \
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/01_basic_sync/application_setup.yaml \
   | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 
 # or use alias

@@ -1,13 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: study-kustomize-dev
+  name: study-auto-sync
 spec:
   project: study
   source:
     repoURL: https://github.com/soom-kang/argocd-digging.git
     targetRevision: main
-    path: github/6_kustomize_overlay/overlays/dev
+    path: github/02_auto_sync_prune_self_heal
   destination:
     server: https://kubernetes.default.svc
-    namespace: study-kustomize
+    namespace: study-auto-sync
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false

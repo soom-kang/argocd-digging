@@ -1,8 +1,8 @@
-# 7_multi_source_helm_values
+# 07_multi_source_helm_values
 
 - 매칭 Git 경로:
-  - `github/7_multi_source_helm_values/chart`
-  - `github/7_multi_source_helm_values/values`
+  - `github/07_multi_source_helm_values/chart`
+  - `github/07_multi_source_helm_values/values`
 - 목표: 하나의 Application에서 `sources[]`를 사용해 Helm chart와 외부 values 파일을 분리 관리하는 방식 검증
 
 ---
@@ -28,10 +28,10 @@
 ```yaml
 spec:
   sources:
-    - path: github/7_multi_source_helm_values/chart
+    - path: github/07_multi_source_helm_values/chart
       helm:
         valueFiles:
-          - $values/github/7_multi_source_helm_values/values/dev-values.yaml
+          - $values/github/07_multi_source_helm_values/values/dev-values.yaml
     - ref: values
 ```
 
@@ -54,7 +54,7 @@ spec:
 ## Step 1. Application 생성
 
 ```bash
-awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/7_multi_source_helm_values/application_setup.yaml \
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/07_multi_source_helm_values/application_setup.yaml \
   | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 ```
 

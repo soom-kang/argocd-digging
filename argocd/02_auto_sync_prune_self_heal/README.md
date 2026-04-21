@@ -1,6 +1,6 @@
-# 2_auto_sync_prune_self_heal
+# 02_auto_sync_prune_self_heal
 
-- 매칭 Git 경로: `github/2_auto_sync_prune_self_heal`
+- 매칭 Git 경로: `github/02_auto_sync_prune_self_heal`
 - 목표: auto sync, prune, self-heal 검증
 - `prune`: 불필요 리소스 제거
 - `selfHeal`: 드리프트 자동 복구
@@ -151,7 +151,7 @@ automated:
 ## Step 1. Application 생성 (자동 동기화 + yaml 파일 적용)
 
 ```bash
-awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/2_auto_sync_prune_self_heal/argo_setup.yaml \
+awk -v repo="$REPO_URL" '{gsub(/\$\{REPO_URL\}/,repo)}1' argocd/02_auto_sync_prune_self_heal/argo_setup.yaml \
   | kubectl --kubeconfig "$STUDY_KUBECONFIG" -n "$ARGOCD_NS" apply -f -
 
 # or
@@ -177,7 +177,7 @@ kubectl --kubeconfig "$STUDY_KUBECONFIG" -n study-auto-sync get deploy auto-sync
 
 ## Step 4. Prune 테스트
 
-`github/2_auto_sync_prune_self_heal/configmap.yaml` 파일을 Git에서 삭제 후 push 합니다.
+`github/02_auto_sync_prune_self_heal/configmap.yaml` 파일을 Git에서 삭제 후 push 합니다.
 
 ```bash
 argocd app get study-auto-sync --argocd-context "$ARGOCD_CLI_CONTEXT"

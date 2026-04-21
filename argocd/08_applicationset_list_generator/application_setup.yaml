@@ -7,13 +7,13 @@ spec:
     - list:
         elements:
           - appName: team-a
-            path: github/8_applicationset_list_generator/apps/team-a
+            path: github/08_applicationset_list_generator/apps/team-a
             namespace: study-appset-team-a
           - appName: team-b
-            path: github/8_applicationset_list_generator/apps/team-b
+            path: github/08_applicationset_list_generator/apps/team-b
             namespace: study-appset-team-b
           # - appName: team-c
-          #   path: github/8_applicationset_list_generator/apps/team-c
+          #   path: github/08_applicationset_list_generator/apps/team-c
           #   namespace: study-appset-team-c
   template:
     metadata:
