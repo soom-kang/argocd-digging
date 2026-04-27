@@ -19,3 +19,4 @@
 - `09_sync_windows`
 - `10_orphaned_resources_monitoring`
 - `11_sync_options`
+- `12_config_management_plugin`

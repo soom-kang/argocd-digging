@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-cmp-plugin
+spec:
+  project: study
+  source:
+    repoURL: https://github.com/soom-kang/argocd-digging.git
+    targetRevision: main
+    path: github/12_config_management_plugin
+    plugin:
+      env:
+        - name: MESSAGE_SUFFIX
+          value: from-application-plugin-env
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-cmp-plugin
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

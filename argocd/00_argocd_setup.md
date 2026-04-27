@@ -101,3 +101,4 @@ argocd repo add "$REPO_URL" --argocd-context "$ARGOCD_CLI_CONTEXT"
 9. `argocd/09_sync_windows/README.md`
 10. `argocd/10_orphaned_resources_monitoring/README.md`
 11. `argocd/11_sync_options/README.md`
+12. `argocd/12_config_management_plugin/README.md`

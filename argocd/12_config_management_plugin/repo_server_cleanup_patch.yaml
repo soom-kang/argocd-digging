@@ -1,0 +1,11 @@
+spec:
+  template:
+    spec:
+      containers:
+        - name: study-cmp
+          $patch: delete
+      volumes:
+        - name: study-cmp-plugin
+          $patch: delete
+        - name: study-cmp-tmp
+          $patch: delete
