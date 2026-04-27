@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: study-rollouts-blue-green
+spec:
+  project: study
+  source:
+    repoURL: https://github.com/soom-kang/argocd-digging.git
+    targetRevision: main
+    path: github/13_argo_rollouts_blue_green
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: study-rollouts-blue-green
+  ignoreDifferences:
+    - group: ""
+      kind: Service
+      name: rollouts-bluegreen-active
+      namespace: study-rollouts-blue-green
+      jsonPointers:
+        - /spec/selector/rollouts-pod-template-hash
+    - group: ""
+      kind: Service
+      name: rollouts-bluegreen-preview
+      namespace: study-rollouts-blue-green
+      jsonPointers:
+        - /spec/selector/rollouts-pod-template-hash
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - SkipDryRunOnMissingResource=true
+      - PruneLast=true
+      - RespectIgnoreDifferences=true

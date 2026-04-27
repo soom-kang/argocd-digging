@@ -20,3 +20,4 @@
 - `10_orphaned_resources_monitoring`
 - `11_sync_options`
 - `12_config_management_plugin`
+- `13_argo_rollouts_blue_green`

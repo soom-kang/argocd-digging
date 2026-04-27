@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: study-rollouts-blue-green
+  labels:
+    app.kubernetes.io/part-of: argocd-study
+    study.argocd/topic: argo-rollouts-blue-green

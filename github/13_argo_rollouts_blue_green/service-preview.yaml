@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollouts-bluegreen-preview
+  namespace: study-rollouts-blue-green
+  labels:
+    app.kubernetes.io/name: rollouts-bluegreen
+    app.kubernetes.io/part-of: argocd-study
+spec:
+  selector:
+    app: rollouts-bluegreen
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollouts-bluegreen
+  namespace: study-rollouts-blue-green
+  labels:
+    app.kubernetes.io/name: rollouts-bluegreen
+    app.kubernetes.io/part-of: argocd-study
+spec:
+  replicas: 3
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollouts-bluegreen
+  template:
+    metadata:
+      labels:
+        app: rollouts-bluegreen
+    spec:
+      containers:
+        - name: rollouts-demo
+          image: argoproj/rollouts-demo:blue
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 5
+  strategy:
+    blueGreen:
+      activeService: rollouts-bluegreen-active
+      previewService: rollouts-bluegreen-preview
+      autoPromotionEnabled: false
+      previewReplicaCount: 1
+      scaleDownDelaySeconds: 30

@@ -1,0 +1,14 @@
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: rollout-extension
+          $patch: delete
+      containers:
+        - name: argocd-server
+          volumeMounts:
+            - mountPath: /tmp/extensions/
+              $patch: delete
+      volumes:
+        - name: rollout-extensions
+          $patch: delete
